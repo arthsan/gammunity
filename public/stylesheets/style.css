@@ -5,4 +5,8 @@ body {
 a {
   color: #00B7FF; }
 
+.box-test {
+  border: 1px solid red;
+  height: 300px; }
+
 /*# sourceMappingURL=style.css.map */
