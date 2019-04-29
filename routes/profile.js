@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/profile', (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.render('profile');
 });
 
-router.get('/profile/edit', (req, res, next) => {
+router.get('/edit', (req, res, next) => {
   res.render('profile-edit');
 });
 
