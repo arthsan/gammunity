@@ -23,9 +23,22 @@
     "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "popper.js": "^1.15.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnoldThanos/GAMMUNITY.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArnoldThanos/GAMMUNITY/issues"
+  },
+  "homepage": "https://github.com/ArnoldThanos/GAMMUNITY#readme",
+  "description": ""
 }

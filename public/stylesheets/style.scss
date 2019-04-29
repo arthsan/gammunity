@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+#container-home{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5% auto;
+}
