@@ -6,8 +6,34 @@ body {
 a {
   color: #00B7FF;
 }
+#container-home{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5% auto;
+}
+.btn-primary{
+  margin: 10px 100px; 
+}
+.SocialLogIn{
+  display: block;
+  height: 30px;
+  border-style: solid;
+  border-width : 1px 1px 1px 1px;
+  text-decoration : none;
+  text-align: center;
+  color: white;
+  background-color: rgb(78, 107, 204);
+  padding : 4px;
+  margin-bottom: 10px; 
+}
+#homeContainer{
+  margin: 5% auto;
+}
 
-.box-map {
-  border: 1px solid red;
-  height: 300px
+.marg {
+  margin: 10px 0;
+}
+
+.event-detail {
+  height: 500px;
 }
