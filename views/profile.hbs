@@ -1,0 +1,121 @@
+<div class="container" id="profileContainer">
+  <div class="row">
+    <div class="col-md-12" id="head"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6" id="principal">
+      <div class="row">            
+        <div class="col-md-12">
+          <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="/images/Arnold Lafuente Urquieta(1).jpg" class="card-img" alt="avatar">     
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <p class="card-text">USERNAME: Thanos</p>
+                  <p class="card-text">EMAIL: thanos-alu001@hotmail.com</p>
+                  <p class="card-text">BIRTHDAY: 14/05/86</p>
+                  <p class="card-text">ROLE: ADMIN</p> 
+                  {{!-- <a href="/home/profile/edit">Edit profile</a>     --}}
+                  <button type="button" class="btnPicture btn-sm" data-toggle="modal" data-target="#exampleModal">Edit Picture</button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Select Picture</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>  
+                        <div class="modal-body">                        
+                          <input type="file" name="photo">
+                          <input type="submit" value="SAVE">
+                        </div>
+                        <div class="modal-footer">
+                          <form action="/profile/edit" method="post" enctype="multipart/form-data"></form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                          </form>                      
+                        </div>
+                      </div>
+                    </div>
+                  </div>     
+              </div>
+            </div>
+          </div> 
+        </div>        
+      </div>
+    </div>
+    <div class="col-md-2" id="lateral">      
+    </div>
+    <div class="col-md-4" id="lateral">
+      <div class="row">
+        <div class="col-md-12" id="anuncios">
+          <article>
+            <h4>ACCOUNTS</h4>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Platform
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">PS4</a>
+                <a class="dropdown-item" href="#">NINTENDO</a>
+                <a class="dropdown-item" href="#">LOL</a>
+              </div>
+            </div>
+            <p>USERNAME</p>
+            <p>LEVEL</p>    
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div class="container" id="profileBottomContainer">
+  <div class="row">
+    <div class="col-md-12" id="head"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2" id="principal">
+      <div class="row">            
+        <div class="col-md-12">
+          <aside>
+            <p>LEVEL</p>
+            <p>CLANS</p>
+            <a href="/profile/friends"> FRIENDS</a> 
+            <br>
+            <br>  
+            <a href="/profile/clans"> CLANS</a>         
+          <aside>
+        </div>        
+      </div>
+    </div>
+    <div class="col-md-10" id="lateral">
+      <div class="row">
+        <div class="col-md-12" id="comments">
+          <h2>Comments</h2>                    
+            <h5>USERNAME</h5>
+            <div class = "row comments">
+              <div class="col-md-1" id="commentPhoto">
+                <img src="/images/logo-ironhack-blue.png" width="40" height="40" class="d-inline-block align-top" alt="guestPhoto">
+              </div>
+              <div class="col-md-11" id="commentGuest">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi optio dignissimos nisi assumenda voluptas similique, esse, vel, fugiat rerum, natus neque perspiciatis accusamus error! Eaque, nobis, et! Reprehenderit, cumque, distinctio.</p>
+              </div> 
+            </div>
+            <h5>USERNAME</h5>
+            <div class = "row comments">
+              <div class="col-md-1" id="commentPhoto">
+                <img src="/images/logo-ironhack-blue.png" width="40" height="40" class="d-inline-block align-top" alt="guestPhoto">
+              </div>
+              <div class="col-md-11" id="commentGuest">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi optio dignissimos nisi assumenda voluptas similique, esse, vel, fugiat rerum, natus neque perspiciatis accusamus error! Eaque, nobis, et! Reprehenderit, cumque, distinctio.</p>
+              </div> 
+            </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+

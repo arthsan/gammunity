@@ -29,3 +29,43 @@ a {
 #homeContainer{
   margin: 5% auto;
 }
+#profileContainer{
+  margin: 5% auto;
+}
+
+#profileBottomContainer{
+  margin: 2% auto;
+}
+
+.comments{
+  border: 1px solid red;
+  margin: 0 auto 2% auto;
+  margin: 2% auto;
+}
+
+#commentPhoto > img{
+  margin: 1px solid red;
+}
+.dropdown{
+  margin: 10px auto;
+}
+.btnPicture{
+  background-color: rgb(54, 69, 202);
+  color: white;
+}
+
+.thumb{
+  height: 600px;
+}
+
+#articleContainer{
+  margin: 5% auto;
+}
+
+.commentsArticle{
+  margin: 0 auto 1% auto;
+}
+
+#article{
+  border: 1px solid red;
+}
