@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   },
   rate: { type: Number, default: 0 },
 }, {
-  timestamps: { type: Date, default: Date.now },
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 const Event = mongoose.model('Event', eventSchema);

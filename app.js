@@ -51,12 +51,14 @@ const index = require('./routes/index');
 const profile = require('./routes/profile');
 const article = require('./routes/articles');
 const event = require('./routes/event');
-
+const sign = require('./routes/auth-routes');
 
 app.use('/', index);
 app.use('/profile', profile);
 app.use('/article', article);
 app.use('/events', event);
+app.use('/', sign);
+
 
 // const event = require('./routes/event');
 // app.use('/', event);

@@ -10,7 +10,7 @@ const articleSchema = new Schema({
   // _idUserphoto: String,
   rate: { type: Number, default: 1 },
 }, {
-  timestamps: { type: Date, default: Date.now },
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
   comment: String,
 });
 
