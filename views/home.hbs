@@ -1,22 +1,8 @@
 <div class="container" id="homeContainer">
-  <div class="card-deck">
-    <div class="card">
-      {{>mainEvent}}     
-    </div>    
-    <div class="card">
-      <img src="/images/9888042-3d-play-games-crossword-on-white-background.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Main event 2</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>      
-    </div>
-    <div class="card">
-      <img src="/images/9888042-3d-play-games-crossword-on-white-background.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Main event 3</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>     
-    </div>
+  <div class="card-deck">    
+      {{#each mainEvent}}     
+        {{>mainEvent this}} 
+      {{/each}}      
   </div>
 </div>  
 
@@ -26,25 +12,10 @@
       </div>
       <div class="row">
         <div class="col-md-8" id="principal">
-          <div class="row">            
-            <div class="col-md-12">
-              <article>
-                <h2>EVENT 1</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum cupiditate, dignissimos quo. Dolore, omnis totam quibusdam voluptatibus cum, nulla dolores sunt iste? Sunt nam illum, animi magni veniam adipisci non.</p>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <article>
-                <h2>EVENT 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum cupiditate, dignissimos quo. Dolore, omnis totam quibusdam voluptatibus cum, nulla dolores sunt iste? Sunt nam illum, animi magni veniam adipisci non.</p>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <article>
-                <h2>EVENT 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum cupiditate, dignissimos quo. Dolore, omnis totam quibusdam voluptatibus cum, nulla dolores sunt iste? Sunt nam illum, animi magni veniam adipisci non.</p>
-              </article>
-            </div>           
+          <div class="row"> 
+            {{#each leftEvent}}  
+              {{> secondaryEventPartial this}}  
+            {{/each}}  
           </div>
         </div>
         <div class="col-md-4" id="lateral">
