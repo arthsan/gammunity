@@ -1,6 +1,7 @@
 // routes/auth-routes.js
 const express = require('express');
 const passport = require('passport');
+const ensureLogin = require('connect-ensure-login');
 
 const router = express.Router();
 
@@ -12,10 +13,6 @@ const User = require('../models/User');
 const bcryptSalt = 10;
 
 router.get('/', (req, res, next) => {
-  if (req.session.currentUser) {
-    res.render('articles');
-    return;
-  }
   res.render('index');
 });
 
@@ -58,5 +55,30 @@ router.post('/home', (req, res, next) => {
       next(error);
     });
 });
+
+router.get('/sign-in', (req, res, next) => {
+  res.render('sign-in');
+});
+
+router.post('/sign-in', passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/sign-in',
+  failureFlash: true,
+  passReqToCallback: true,
+}));
+
+router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
+  console.log('!!!!!!!!!!!!!!!!!!', req.user);
+  res.render('home', { user: req.user });
+});
+
+router.get('/ranking', (req, res, next) => {
+  res.render('ranking');
+});
+
+router.get('/event/:id', (req, res, next) => {
+  res.render('event-detail');
+});
+
 
 module.exports = router;
