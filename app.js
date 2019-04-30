@@ -6,6 +6,7 @@ const express      = require('express');
 const favicon      = require('serve-favicon');
 const hbs          = require('hbs');
 const mongoose     = require('mongoose');
+// const MongoStore = require('connect-mongo')(session);
 const logger       = require('morgan');
 const path         = require('path');
 const session = require('express-session');
@@ -13,7 +14,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
-
+const flash = require("connect-flash");
 
 mongoose
   .connect('mongodb://localhost/gammunity', {useNewUrlParser: true})
@@ -30,16 +31,18 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 // Middleware Setup
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
 // Passport
+// app.use(session({
+//   secret: 'our-passport-local-strategy-app',
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: { maxAge: 3000000 },
+// }));
+
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 
 passport.serializeUser((user, cb) => {
@@ -53,16 +56,19 @@ passport.deserializeUser((id, cb) => {
   });
 });
 
-passport.use(new LocalStrategy((username, password, next) => {
+
+passport.use(new LocalStrategy({
+  passReqToCallback: true,
+}, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username" });
+      return next(null, false, { message: 'Incorrect username' });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      return next(null, false, { message: 'Incorrect password' });
     }
 
     return next(null, user);
@@ -71,6 +77,11 @@ passport.use(new LocalStrategy((username, password, next) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(flash());
 
 // Express View engine setup
 
@@ -96,10 +107,10 @@ const event = require('./routes/event');
 const sign = require('./routes/auth-routes');
 const login = require('./routes/login');
 
-app.use('/', index);
 app.use('/profile', profile);
 app.use('/article', article);
 app.use('/events', event);
+app.use('/', index);
 app.use('/', sign);
 app.use('/', login);
 

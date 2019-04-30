@@ -20,9 +20,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/home', (req, res, next) => {
-  const { username } = req.body;
-  const { password } = req.body;
-  const { passCheck } = req.body;
+  const { username, password, passCheck } = req.body;
 
   if (username === '' || password === '' || passCheck === '') {
     res.render('index', { message: 'Indicate username and password' });
