@@ -94,14 +94,14 @@ const profile = require('./routes/profile');
 const article = require('./routes/articles');
 const event = require('./routes/event');
 const sign = require('./routes/auth-routes');
+const login = require('./routes/login');
 
 app.use('/', index);
 app.use('/profile', profile);
 app.use('/article', article);
 app.use('/events', event);
 app.use('/', sign);
-
-
+app.use('/', login);
 
 // const event = require('./routes/event');
 // app.use('/', event);
