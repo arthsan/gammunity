@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/events', (req, res, next) => {
-  res.render('events');
+router.get('/', (req, res, next) => {
+  res.render('event-detail');
 });
 
-router.get('/events/:id', (req, res, next) => {
-  res.render('aevents');
+router.get('/:id', (req, res, next) => {
+  res.render('event-detail');
 });
 
 module.exports = router;

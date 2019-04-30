@@ -11,7 +11,7 @@ const path         = require('path');
 
 
 mongoose
-  .connect('mongodb://localhost/community', {useNewUrlParser: true})
+  .connect('mongodb://localhost/gammunity', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -43,19 +43,23 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 hbs.registerPartials(__dirname + '/views/partials')
+console.log('###########', __dirname)
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
 const index = require('./routes/index');
 const profile = require('./routes/profile');
 const article = require('./routes/articles');
-const event = require('./routes/events');
+const event = require('./routes/event');
 
 
 app.use('/', index);
 app.use('/profile', profile);
-app.use('/articles', article);
+app.use('/article', article);
 app.use('/events', event);
+
+// const event = require('./routes/event');
+// app.use('/', event);
 
 
 module.exports = app;

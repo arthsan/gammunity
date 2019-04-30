@@ -8,14 +8,14 @@
         <div class="col-md-12">
           <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="/images/Arnold Lafuente Urquieta(1).jpg" class="card-img" alt="avatar">     
+                <img src="{{name.photo}}" class="card-img" alt="avatar">     
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <p class="card-text">USERNAME: Thanos</p>
-                  <p class="card-text">EMAIL: thanos-alu001@hotmail.com</p>
-                  <p class="card-text">BIRTHDAY: 14/05/86</p>
-                  <p class="card-text">ROLE: ADMIN</p> 
+                  <p class="card-text">USERNAME: {{name.username}}</p>
+                  <p class="card-text">EMAIL: {{name.email}}</p>
+                  <p class="card-text">BIRTHDAY: {{name.birthday}}</p>
+                  <p class="card-text">ROLE: {{name.role}}</p> 
                   {{!-- <a href="/home/profile/edit">Edit profile</a>     --}}
                   <button type="button" class="btnPicture btn-sm" data-toggle="modal" data-target="#exampleModal">Edit Picture</button>
                   <!-- Modal -->
