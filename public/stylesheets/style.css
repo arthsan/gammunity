@@ -67,4 +67,8 @@ a {
 .card-title-article {
   text-align: center; }
 
+#joinbtn {
+  margin: 0 auto;
+  width: 100px; }
+
 /*# sourceMappingURL=style.css.map */
