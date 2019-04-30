@@ -1,23 +1,8 @@
 
-<div class="container" id="homeContainer">
+<div class="container" id="homeContainer">  
   <div class="card-deck">
-    <div class="card">     
-        <a href="/article/:id" class="thumb" sl-processed="1">
-	        <img src="https://sm.ign.com/t/ign_br/slotter/default/arya_cpd5.560.jpg" alt="Review: Game of Thrones - 'The Long Night'" class="thumb"> 
-	        <h3 class="caption">Article 1</h3>
-	      </a>                
-    </div>
-    <div class="card">     
-        <a href="/article/:id" class="thumb" sl-processed="1">
-	        <img src="https://sm.ign.com/t/ign_br/slotter/default/arya_cpd5.560.jpg" alt="Review: Game of Thrones - 'The Long Night'" class="thumb" >
-	        <h3 class="caption">Article 2</h3>
-	      </a>                
-    </div>
-    <div class="card">     
-        <a href="/article/:id" class="thumb" sl-processed="1">
-	        <img src="https://sm.ign.com/t/ign_br/slotter/default/arya_cpd5.560.jpg" alt="Review: Game of Thrones - 'The Long Night'" class="thumb">
-	        <h3 class="caption">Article 3</h3>
-	      </a>                
-    </div>
-  </div>
+      {{#each articles}}     
+        {{> articlesPartial this}} 
+      {{/each}} 
+  </div>    
 </div>  

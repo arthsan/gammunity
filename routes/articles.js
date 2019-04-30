@@ -4,7 +4,11 @@ const router = express.Router();
 const Articles = require('../models/Article.js');
 
 router.get('/', (req, res, next) => {
-  res.render('articles');
+  Articles.find()
+    .then((result) => {
+      console.log(result);
+      res.render('articles', { articles: result });
+    });
 });
 
 router.get('/:id', (req, res, next) => {
@@ -16,12 +20,3 @@ router.get('/:id', (req, res, next) => {
 });
 
 module.exports = router;
-
-
-router.get('/:id', (req, res, next) => {
-  Users.findById({ _id: req.params.id })
-    .then((result) => {
-      console.log(result);
-      res.render('profile', { name: result });
-    });
-});
