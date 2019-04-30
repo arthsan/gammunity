@@ -64,4 +64,8 @@ a {
 .nav-link {
   color: white; }
 
+.error-msg {
+  color: red;
+  padding: 0 50px; }
+
 /*# sourceMappingURL=style.css.map */

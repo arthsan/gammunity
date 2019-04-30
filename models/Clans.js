@@ -20,7 +20,7 @@ const clanSchema = new Schema({
   level: { type: Number, default: 0 },
   // location:
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 });
 
 const Clan = mongoose.model('Clan', clanSchema);

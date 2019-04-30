@@ -10,7 +10,7 @@ const commentsSchema = new Schema({
   // _idUserphoto: String,
   rate: { type: Number, default: 1 },
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 });
 
 const Comments = mongoose.model('Comments', commentsSchema);
