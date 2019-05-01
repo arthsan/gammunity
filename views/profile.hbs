@@ -27,12 +27,12 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>  
-                        <form action="/profile/{{user._id}}" method="POST">
+                        <form enctype="multipart/form-data" action="/profile/{{user._id}}/{{user.photoName}}" method="POST">
                         <div class="modal-body">                        
                           <input type="file" name="photo">
                           <input type="submit" value="SAVE">
-                          </form>
                         </div>
+                        </form>
                         <div class="modal-footer">
                           <form action="/profile/edit" method="post" enctype="multipart/form-data"></form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 

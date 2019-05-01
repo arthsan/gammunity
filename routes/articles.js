@@ -3,6 +3,7 @@ const ensureLogin = require('connect-ensure-login');
 
 const router = express.Router();
 const Articles = require('../models/Article.js');
+const uploadCloud = require('../config/cloudinary.js');
 
 router.get('/', (req, res, next) => {
   Articles.find()
@@ -15,9 +16,11 @@ router.get('/new', (req, res, next) => {
   res.render('createNew', { user: req.user });
 });
 
-router.post('/new', (req, res, next) => {  
-  const { title, photo, text } = req.body;  
-  const newArticle = new Articles({ title, photo, text });  
+router.post('/new', uploadCloud.single('photo'), (req, res, next) => {  
+  const { title, text } = req.body;  
+  const photo = req.file.url;
+  const photoName = req.file.originalname; 
+  const newArticle = new Articles({ title, text, photo, photoName });  
   newArticle.save()
     .then((article) => {
       res.render('articles');

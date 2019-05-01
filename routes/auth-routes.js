@@ -9,6 +9,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Events = require('../models/Event.js');
+const uploadCloud = require('../config/cloudinary.js');
 
 // Bcrypt to encrypt passwords
 const bcryptSalt = 10;
@@ -97,9 +98,12 @@ router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('createEvent');
 });
 
-router.post('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { title, category, photo, clan, text, date }= req.body;   
-  const newEvent = new Events({ title, category, photo, clan, text, date });  
+router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
+  const { title, category, clan, text, date } = req.body;
+  const photo = req.file.url;
+  const photoName = req.file.originalname;
+  console.log(photo);
+  const newEvent = new Events({ title, category, photoName, photo, clan, text, date });  
   newEvent.save()
     .then((event) => {
       res.render('home');
@@ -112,8 +116,7 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
-    .then((result) => {
-      console.log(result);
+    .then((result) => {     
       res.render('event-detail', { user: req.user, event: result });
     })
     .catch((error) => {

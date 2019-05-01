@@ -8,6 +8,7 @@ const userSchema = new Schema({
   nickname: String,
   password: String,
   birthday: Date,
+  photoName: String,
   photo: { type: String, default: 'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png' },
   role: { type: String, enum: ['ADMIN', 'GUEST', 'MEMBER'], default: 'GUEST' },
   clan: String,
