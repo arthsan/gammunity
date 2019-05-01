@@ -6,6 +6,7 @@ const articleSchema = new Schema({
   title: String,
   text: String,
   photo: { type: String, default: 'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png' },
+  photoName: String,
   // _idUsername: String,
   // _idUserphoto: String,
   rate: { type: Number, default: 1 },

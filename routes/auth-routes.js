@@ -9,6 +9,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Events = require('../models/Event.js');
+const uploadCloud = require('../config/cloudinary.js');
 
 // Bcrypt to encrypt passwords
 const bcryptSalt = 10;
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.post('/home', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const { username, password, passCheck } = req.body;
 
   if (username === '' || password === '' || passCheck === '') {
@@ -48,7 +49,7 @@ router.post('/home', (req, res, next) => {
         if (err) {
           res.render('index', { message: 'Something went wrong' });
         } else {
-          res.redirect('/home');
+          res.render('sign-in', { message: 'Account created!' });
         }
       });
     })
@@ -74,10 +75,15 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
     .then((result) => {
       let mainEvents;
       let leftEvents;
+      const obj = {};
       const a = result.sort((a, b) => b.rate - a.rate);
       mainEvents = a.slice(0, 3);
       leftEvents = a.slice(3);
-      res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+      if (req.user.role === 'ADMIN') {
+        res.render('home', { admin: req.user.role, user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+      } else {
+        res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+      }
     })
     .catch((error) => {
       console.log('Error while retrieving events details: ', error);
@@ -92,9 +98,12 @@ router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('createEvent');
 });
 
-router.post('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { title, category, photo, clan, text, date }= req.body;   
-  const newEvent = new Events({ title, category, photo, clan, text, date });  
+router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
+  const { title, category, clan, text, date } = req.body;
+  const photo = req.file.url;
+  const photoName = req.file.originalname;
+  console.log(photo);
+  const newEvent = new Events({ title, category, photoName, photo, clan, text, date });  
   newEvent.save()
     .then((event) => {
       res.render('home');
@@ -107,8 +116,7 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
-    .then((result) => {
-      console.log(result);
+    .then((result) => {     
       res.render('event-detail', { user: req.user, event: result });
     })
     .catch((error) => {

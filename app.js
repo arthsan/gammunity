@@ -43,6 +43,9 @@ app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    maxAge: 3000000,
+  },
 }));
 
 passport.serializeUser((user, cb) => {
