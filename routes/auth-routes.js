@@ -28,6 +28,7 @@ router.post('/', (req, res, next) => {
 
   if (passCheck !== password) {
     res.render('index', { message: 'Check your password' });
+    return;
   }
 
   User.findOne({ username })
@@ -95,7 +96,7 @@ router.get('/ranking', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('createEvent');
+  res.render('createEvent', { user: req.user });
 });
 
 router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
@@ -106,12 +107,12 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
   const newEvent = new Events({ title, category, photoName, photo, clan, text, date });  
   newEvent.save()
     .then((event) => {
-      res.render('home');
+      res.render('home', { user: req.user });
     })
     .catch((error) => {
       console.log(error);
     });
-  res.render('createEvent');
+  res.render('createEvent', { user: req.user });
 });
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {

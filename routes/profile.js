@@ -19,12 +19,22 @@ router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { nickname, password, username, birthday } = req.body;
+  const { nickname, password, passCheck, username, birthday } = req.body;
+ 
+  if (username === '' || password === '' || passCheck === '') {
+    res.render('profile-edit', { message: 'Indicate username and password' });
+    return;
+  }
+  
+  if (passCheck !== password) {
+    res.render('profile-edit', { message: 'Check your password' });
+    return;
+  }
+
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
   Users.findByIdAndUpdate(req.params.id, { $set: { nickname, password: hashPass, username, birthday } })
     .then((result) => {
-
       console.log(result)
       res.redirect(`/profile/${req.params.id}`);
     })
