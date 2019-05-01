@@ -18,9 +18,9 @@ router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { nickname, password, email, birthday } = req.body;
-  console.log(req.params.id, nickname, password, email, birthday)
-  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, password, email, birthday } })
+  const { nickname, password, username, birthday, photo } = req.body;
+  console.log(req.params.id, nickname, password, username, birthday)
+  Users.findByIdAndUpdate(req.params.id, { $set: { photo, nickname, password, username, birthday } })
     .then((result) => {
       console.log(result)
       res.redirect(`/profile/${req.params.id}`);

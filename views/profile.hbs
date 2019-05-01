@@ -16,8 +16,7 @@
                   <p class="card-text">EMAIL: {{name.username}}</p>
                   <p class="card-text">BIRTHDAY: {{name.birthday}}</p>
                   <p class="card-text">ROLE: {{name.role}}</p> 
-                  <a href="/profile/edit">Edit profile</a>    
-                  <button type="button" class="btnPicture btn-sm" data-toggle="modal" data-target="#exampleModal">Edit Picture</button>
+                  <button type="button" class="btnPicture btn-sm" data-toggle="modal" name="photo" data-target="#exampleModal">Edit Picture</button>
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -28,9 +27,11 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>  
+                        <form action="/profile/{{user._id}}" method="POST">
                         <div class="modal-body">                        
                           <input type="file" name="photo">
                           <input type="submit" value="SAVE">
+                          </form>
                         </div>
                         <div class="modal-footer">
                           <form action="/profile/edit" method="post" enctype="multipart/form-data"></form>
