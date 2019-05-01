@@ -1,20 +1,20 @@
- 
-<div id="container-home-event">
-  <div class="card" style="width: 700">
-    <form action="/article" method="post" enctype="multipart/form-data">
-    <div class="form-group">      
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="titleArticle" aria-describedby="emailHelp" placeholder="Enter Title">      
-    </div>    
-    <label>Article Photo</label>
-    <br>
-    <input type="file" name="photo">
-    <br>
-    <br>
-    <div class="form-group">         
-      <textarea name="comment" form="usrform" placeholder="write about your new..." style="width:100%;"></textarea>      
-    </div>        
-    <button type="submit" class="btn btn-primary" id="articleSumit">Submit</button>
-  </form>
+<form action="/article/new" method="POST" >
+  <div id="container-home-event">
+    <div class="card" style="width: 700">
+      <div class="form-group">      
+        <label for="title">Title</label>
+        <input type="text" class="form-control" placeholder="Enter Title" name="title">      
+      </div>    
+      <label>Article Photo</label>
+      <br>
+      <input type="file" name="photo">
+      <br>
+      <br>
+      <div class="form-group">
+          <textarea name="text" placeholder="write about your new..." style="width:100%;">
+          </textarea>
+      </div>        
+      <button type="submit" class="btn btn-primary" id="articleSumit">Submit</button>
+    </div>
   </div>
-</div>
+</form>
