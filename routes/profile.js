@@ -1,8 +1,9 @@
 const express = require('express');
-
+const bcrypt = require('bcrypt');
 const ensureLogin = require('connect-ensure-login');
 const uploadCloud = require('../config/cloudinary.js');
 
+const bcryptSalt = 10;
 const router = express.Router();
 const Users = require('../models/User.js');
 
@@ -19,18 +20,18 @@ router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { nickname, password, username, birthday } = req.body;
-  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, password, username, birthday } })
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
+  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, hashPass, username, birthday } })
     .then((result) => {
+
       console.log(result)
       res.redirect(`/profile/${req.params.id}`);
     })
-    .catch((error) => {
-      console.log(error);
-    });
 });
 
 
-router.post('/:id/:photoName', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
+router.post('/:id/photo', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
   const photo = req.file.url;
   const photoName = req.file.originalname;
   Users.findByIdAndUpdate(req.params.id, { $set: { photo, photoName } })
