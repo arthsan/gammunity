@@ -20,6 +20,10 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/new', (req, res, next) => {
+  res.render('createEvent');
+});
+
 router.get('/:id', (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .then((result) => {

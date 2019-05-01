@@ -11,6 +11,10 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/new', (req, res, next) => {
+  res.render('createNew');
+});
+
 router.get('/:id', (req, res, next) => {
   Articles.findById({ _id: req.params.id })
     .then((result) => {
