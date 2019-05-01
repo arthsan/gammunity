@@ -2,28 +2,22 @@
 <div id="container-home">
   <div class="card" style="width: 500;">
     <form action="/profile/{{user._id}}" method="post">
-      {{!-- <div class="form-group">       --}}
         <label for="exampleInputEmail1">Email address :</label>
         <label>{{user.username}}</label>
         <input name="username" value="{{user.username}}" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      {{!-- </div> --}}
-      {{!-- <div class="form-group"> --}}
         <label for="exampleInputPassword1">Password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      {{!-- </div> --}}
-      {{!-- <div class="form-group">       --}}
+        <label for="exampleInputPassword2">Confirm Password</label>
+        <input type="password" name="passCheck" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
         <label for="exampleInputEmail1">NickName :</label>
         <label>{{user.nickname}}</label><input name="nickname" value="{{user.nickname}}" type="text" class="form-control" id="nickname" placeholder="NickName">
-      {{!-- </div>     --}}
-      {{!-- <div class="form-group"> --}}
         <label for="birthday">Birthday :</label>
         <label>{{user.birthday}}</label>
-        <input type="date" name="birthday" class="form-control" id="birthday">
-      {{!-- </div>     --}}
-      {{!-- <label>Avatar/Photo</label> --}}
-      {{!-- <br> --}}
-      {{!-- <input type="file" name="photo"> --}}
+        <input type="date" name="birthday" class="form-control" value="{{user.birthday}}" id="birthday">
+      {{#if message }}
+            <div class="error-msg">{{message }} </div>
+      {{/if}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
