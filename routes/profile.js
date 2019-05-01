@@ -22,12 +22,12 @@ router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { nickname, password, passCheck, username, birthday } = req.body;
  
   if (username === '' || password === '' || passCheck === '') {
-    res.render('profile-edit', { message: 'Indicate username and password' });
+    res.render('profile-edit', { user: req.user, message: 'Indicate username and password' });
     return;
   }
   
   if (passCheck !== password) {
-    res.render('profile-edit', { message: 'Check your password' });
+    res.render('profile-edit', { user: req.user, message: 'Check your password' });
     return;
   }
 
