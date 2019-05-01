@@ -100,15 +100,15 @@ console.log('###########', __dirname)
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
-const index = require('./routes/index');
+// const index = require('./routes/index');
 const profile = require('./routes/profile');
 const article = require('./routes/articles');
-const event = require('./routes/event');
+// const event = require('./routes/event');
 const sign = require('./routes/auth-routes');
 
 app.use('/profile', profile);
 app.use('/article', article);
-app.use('/events', event);
+// app.use('/events', event);
 // app.use('/', index);
 app.use('/', sign);
 // app.use('/', login);

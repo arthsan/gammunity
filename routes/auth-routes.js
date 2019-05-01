@@ -8,6 +8,7 @@ const router = express.Router();
 // User model
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Events = require('../models/Event.js');
 
 // Bcrypt to encrypt passwords
 const bcryptSalt = 10;
@@ -72,12 +73,44 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('home', { user: req.user });
 });
 
-router.get('/ranking', (req, res, next) => {
-  res.render('ranking');
+router.get('/ranking', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render('ranking', { user: req.user });
 });
 
-router.get('/event/:id', (req, res, next) => {
-  res.render('event-detail');
+router.get('/event/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render('event-detail', { user: req.user });
+});
+
+
+router.get('/events', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Events.find()
+    .then((result) => {
+      let mainEvents;
+      let leftEvents;
+      const a = result.sort((a, b) => b.rate - a.rate);
+      mainEvents = a.slice(0, 3);
+      leftEvents = a.slice(3);
+      res.render('home', { user: req.user, maiEvent: mainEvents, leftEvent: leftEvents });
+    })
+    .catch((error) => {
+      console.log('Error while retrieving events details: ', error);
+    });
+});
+
+router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Events.findById({ _id: req.params.id })
+    .then((result) => {
+      console.log(result);
+      res.render('event-detail', { user: req.user, event: result });
+    })
+    .catch((error) => {
+      console.log('Error while retrieving event details: ', error);
+    });
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/sign-in');
 });
 
 

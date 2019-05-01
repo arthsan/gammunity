@@ -1,13 +1,15 @@
 <div class="col-md-12">
   <article>
     <h5>{{this.title}}</h5> 
+      <a href="/events/{{this._id}}" class="thumb" sl-processed="1">
     <div class = "row comments">
-              <div class="col-md-1" id="commentPhoto">
-                <img src="{{this.photo}}" width="40" height="40" class="d-inline-block align-top" alt="guestPhoto">
-              </div>
-              <div class="col-md-11" id="commentGuest">
-                <p>{{this.text}}</p>
-              </div> 
-            </div> 
+        <div class="col-md-1" id="commentPhoto">
+          <img src="{{this.photo}}" width="120" height="120" class="d-inline-block align-top" alt="guestPhoto">
+        </div>
+        <div class="col-md-11" id="commentGuest">
+          <p>{{this.text}}</p>
+        </div> 
+    </div> 
+      </a>  
   </article>
 </div>         
