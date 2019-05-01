@@ -22,7 +22,7 @@ router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { nickname, password, username, birthday } = req.body;
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
-  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, hashPass, username, birthday } })
+  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, password: hashPass, username, birthday } })
     .then((result) => {
 
       console.log(result)
