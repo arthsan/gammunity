@@ -79,4 +79,8 @@ a {
   margin: 5% auto;
   width: 500px; }
 
+#map {
+  height: 500px;
+  width: 100%; }
+
 /*# sourceMappingURL=style.css.map */
