@@ -15,6 +15,18 @@ router.get('/new', (req, res, next) => {
   res.render('createNew');
 });
 
+router.post('/new', (req, res, next) => {  
+  const { title, photo, text } = req.body;  
+  const newArticle = new Articles({ title, photo, text });  
+  newArticle.save()
+    .then((article) => {
+      res.render('articles');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 router.get('/:id', (req, res, next) => {
   Articles.findById({ _id: req.params.id })
     .then((result) => {

@@ -77,7 +77,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
       const a = result.sort((a, b) => b.rate - a.rate);
       mainEvents = a.slice(0, 3);
       leftEvents = a.slice(3);
-      res.render('home', { user: req.user, maiEvent: mainEvents, leftEvent: leftEvents });
+      res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
     })
     .catch((error) => {
       console.log('Error while retrieving events details: ', error);
@@ -88,24 +88,21 @@ router.get('/ranking', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('ranking', { user: req.user });
 });
 
-router.get('/event/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('event-detail', { user: req.user });
+router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render('createEvent');
 });
 
-
-router.get('/events', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  Events.find()
-    .then((result) => {
-      let mainEvents;
-      let leftEvents;
-      const a = result.sort((a, b) => b.rate - a.rate);
-      mainEvents = a.slice(0, 3);
-      leftEvents = a.slice(3);
-      res.render('home', { user: req.user, maiEvent: mainEvents, leftEvent: leftEvents });
+router.post('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  const { title, category, photo, clan, text, date }= req.body;   
+  const newEvent = new Events({ title, category, photo, clan, text, date });  
+  newEvent.save()
+    .then((event) => {
+      res.render('home');
     })
     .catch((error) => {
-      console.log('Error while retrieving events details: ', error);
+      console.log(error);
     });
+  res.render('createEvent');
 });
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
