@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   username: String,
-  email: String,
+  nickname: String,
   password: String,
   birthday: Date,
   photo: { type: String, default: 'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png' },

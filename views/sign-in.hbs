@@ -2,6 +2,9 @@
   <div class="card" style="width: 18rem;">
     <form action="/sign-in" method="POST">
     <div class="form-group">
+      {{#if message}}
+      <div class="error-msg"> {{message }} </div>
+      {{/if}}
       <a href="/auth/gmail" class="SocialLogIn">Login With Gmail</a>
       <label for="exampleInputEmail1">Email address</label>
       <input name="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -13,6 +16,9 @@
     </div>    
     <button type="submit" class="btn btn-primary">Sign In</button>
   </form>
+    <p class="account-message">
+    Don't you have an account?
+    <a href="/">Sign-up</a>
   </div>
 </div>
 

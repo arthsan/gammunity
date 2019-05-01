@@ -7,8 +7,12 @@ const Articles = require('../models/Article.js');
 router.get('/', (req, res, next) => {
   Articles.find()
     .then((result) => {
-      res.render('article', { user: req.user, articles: result });
+      res.render('articles', { user: req.user, articles: result });
     });
+});
+
+router.get('/new', (req, res, next) => {
+  res.render('createNew', { user: req.user });
 });
 
 router.get('/:id', (req, res, next) => {

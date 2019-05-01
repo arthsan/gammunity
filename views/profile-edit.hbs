@@ -1,28 +1,30 @@
  
 <div id="container-home">
   <div class="card" style="width: 500;">
-    <form action="/profile/:id" method="post" enctype="multipart/form-data">
-    <div class="form-group">      
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group">      
-      <label for="exampleInputEmail1">NickName</label>
-      <input type="text" class="form-control" id="nickname" placeholder="NickName">      
-    </div>    
-    <div class="form-group">
-      <label for="exampleInputPassword1">Birthday</label>
-      <input type="date" class="form-control" id="birthday">
-    </div>    
-    <label>Avatar/Photo</label>
-    <br>
-    <input type="file" name="photo">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    <form action="/profile/{{user._id}}" method="post">
+      {{!-- <div class="form-group">       --}}
+        <label for="exampleInputEmail1">Email address :</label>
+        <label>{{user.email}}</label>
+        <input name="email" value="{{user.username}}" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      {{!-- </div> --}}
+      {{!-- <div class="form-group"> --}}
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      {{!-- </div> --}}
+      {{!-- <div class="form-group">       --}}
+        <label for="exampleInputEmail1">NickName :</label>
+        <label>{{user.nickname}}</label><input name="nickname" value="{{user.nickname}}" type="text" class="form-control" id="nickname" placeholder="NickName">
+      {{!-- </div>     --}}
+      {{!-- <div class="form-group"> --}}
+        <label for="exampleInputPassword1">Birthday :</label>
+        <label></label>
+        <input type="month" name="birthday" class="form-control" id="birthday">
+      {{!-- </div>     --}}
+      {{!-- <label>Avatar/Photo</label> --}}
+      {{!-- <br> --}}
+      {{!-- <input type="file" name="photo"> --}}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
 </div>

@@ -1,0 +1,30 @@
+ 
+<div id="container-home-event">
+  <div class="card" style="width: 700">
+    <form action="/events" method="post" enctype="multipart/form-data">
+    <div class="form-group">      
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="titleEvent" aria-describedby="emailHelp" placeholder="Enter Title">      
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input type="text" class="form-control" id="categoryEvent" placeholder="nintendo/PS4/...">
+    </div>
+    <label>Event Photo</label>
+    <br>
+    <input type="file" name="photo">
+    <div class="form-group">      
+      <label for="clan">Clan Name</label>
+      <input type="text" class="form-control" id="clanName">      
+    </div>  
+    <div class="form-group">         
+      <textarea name="comment" form="usrform" placeholder="write about the event..." style="width:100%;"></textarea>      
+    </div>    
+    <div class="form-group">
+      <label for="date">Event Date</label>
+      <input type="date" class="form-control" id="eventStart">
+    </div>    
+    <button type="submit" class="btn btn-primary" id="eventSumit">Submit</button>
+  </form>
+  </div>
+</div>

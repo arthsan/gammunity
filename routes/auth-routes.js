@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.post('/home', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const { username, password, passCheck } = req.body;
 
   if (username === '' || password === '' || passCheck === '') {
@@ -48,7 +48,7 @@ router.post('/home', (req, res, next) => {
         if (err) {
           res.render('index', { message: 'Something went wrong' });
         } else {
-          res.redirect('/home');
+          res.render('sign-in', { message: 'Account created!' });
         }
       });
     })
@@ -70,32 +70,48 @@ router.post('/sign-in', passport.authenticate('local', {
 
 router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   console.log('!!!!!!!!!!!!!!!!!!', req.user);
-  res.render('home', { user: req.user });
+  Events.find()
+    .then((result) => {
+      let mainEvents;
+      let leftEvents;
+      const obj = {};
+      const a = result.sort((a, b) => b.rate - a.rate);
+      mainEvents = a.slice(0, 3);
+      leftEvents = a.slice(3);
+      if (req.user.role === 'ADMIN') {
+        res.render('home', { admin: req.user.role, user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+      } else {
+        res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+      }
+    })
+    .catch((error) => {
+      console.log('Error while retrieving events details: ', error);
+    });
 });
 
 router.get('/ranking', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('ranking', { user: req.user });
 });
 
-router.get('/event/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('event-detail', { user: req.user });
-});
+// router.get('/event/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+//   res.render('event-detail', { user: req.user });
+// });
 
 
-router.get('/events', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  Events.find()
-    .then((result) => {
-      let mainEvents;
-      let leftEvents;
-      const a = result.sort((a, b) => b.rate - a.rate);
-      mainEvents = a.slice(0, 3);
-      leftEvents = a.slice(3);
-      res.render('home', { user: req.user, maiEvent: mainEvents, leftEvent: leftEvents });
-    })
-    .catch((error) => {
-      console.log('Error while retrieving events details: ', error);
-    });
-});
+// router.get('/events', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+//   Events.find()
+//     .then((result) => {
+//       let mainEvents;
+//       let leftEvents;
+//       const a = result.sort((a, b) => b.rate - a.rate);
+//       mainEvents = a.slice(0, 3);
+//       leftEvents = a.slice(3);
+//       res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
+//     })
+//     .catch((error) => {
+//       console.log('Error while retrieving events details: ', error);
+//     });
+// });
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })

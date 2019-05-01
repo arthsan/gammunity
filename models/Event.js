@@ -6,10 +6,11 @@ const eventSchema = new Schema({
   title: String,
   category: String,
   photo: String,
+  text: String,
   // location: String,
   date: { type: Date, default: Date.now },
-  friends: Number,
-  clan: String,
+  friends: { type: Number, default: 0 },
+  clan: { type: String, default: 0 },
   requisits: {
     role: { type: String, enum: ['ADMIN', 'GUEST', 'MEMBER'] },
     clan: Boolean,

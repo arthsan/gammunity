@@ -1,51 +1,45 @@
 {{#if user}}
-  <div class="container" id="homeContainer">
-    <h2>Main Events:</h2>
-    <div class="card-deck">    
-        {{#each mainEvent}}     
-          {{>mainEvent this}} 
-        {{/each}}      
-    </div>
-  </div>  
+<div class="container" id="homeContainer">
+  <h2>Main Events:</h2>
+  <div class="card-deck">    
+      {{#each mainEvent}}     
+        {{>mainEvent this}} 
+      {{/each}}      
+  </div>
+</div>  
 
-  <div class="container" id="homeContainer">
-        <div class="row">
-          <div class="col-md-12" id="head"></div>
-        </div>
-          <h3>Other Events:</h3>
-        <div class="row">
-          <div class="col-md-8" id="principal">
-            <div class="row"> 
-              {{#each leftEvent}}  
-                {{> secondaryEventPartial this}} 
-              {{/each}}  
+<div class="container" id="homeContainer">
+      <div class="row">
+        <div class="col-md-12" id="head"></div>
+      </div>
+        <h3>Other Events:</h3>
+      <div class="row">
+        <div class="col-md-8" id="principal">
+          <div class="row"> 
+            {{#each leftEvent}}  
+              {{> secondaryEventPartial this}} 
+            {{/each}}  
+          </div>
+        </div>  
+        <div class="col-md-4" id="lateral"></div>
+          <div class="row">
+            <div class="col-md-12" id="anuncios">
+              <aside>
+                {{#if admin}}
+                <h2>Aside</h2>
+                <br>
+                <h4>New EVENT</h4>
+                <a href="events/new" class="SocialLogIn">Create a new Event</a>
+                           <h4>New Article</h4>
+                <a href="/article/new" class="SocialLogIn">WRITE A NEW!!</a>  
+                {{/if}}                                   
+              </aside>
             </div>
-            <div class="row">
-              <div class="col-md-8" id="principal">
-                <div class="row"> 
-                  {{#each leftEvent}}  
-                    {{> secondaryEventPartial this}}  
-                  {{/each}}  
-                </div>
-              </div>
-              <div class="col-md-4" id="lateral">
-                <div class="row">
-                  <div class="col-md-12" id="anuncios">
-                    <aside>
-                      <h2>Aside</h2>
-                      <br>
-                      <h4>Titulo</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi optio dignissimos nisi assumenda voluptas similique, esse, vel, fugiat rerum, natus neque perspiciatis accusamus error! Eaque, nobis, et! Reprehenderit, cumque, distinctio.</p>
-                      <br>
-                      <h4>Titulo</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi optio dignissimos nisi assumenda voluptas similique, esse, vel, fugiat rerum, natus neque perspiciatis accusamus error! Eaque, nobis, et! Reprehenderit, cumque, distinctio.</p>
-                    </aside>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>  
+          </div>
+         </div>   
         </div>
+      </div>
+</div>    
 {{/if}}
 
 
