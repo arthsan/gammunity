@@ -1,3 +1,4 @@
+{{#if user}}
 <div class="container" id="homeContainer">
   <h2>Main Events:</h2>
   <div class="card-deck">    
@@ -19,8 +20,6 @@
               {{> secondaryEventPartial this}} 
             {{/each}}  
           </div>
-        </div>
-        <div class="col-md-4" id="lateral">
           <div class="row">
             <div class="col-md-12" id="anuncios">
               <aside>
@@ -33,9 +32,8 @@
               </aside>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
-</div>  
-
+{{/if}}
 
 

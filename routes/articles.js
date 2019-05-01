@@ -1,4 +1,5 @@
 const express = require('express');
+const ensureLogin = require('connect-ensure-login');
 
 const router = express.Router();
 const Articles = require('../models/Article.js');
@@ -6,8 +7,7 @@ const Articles = require('../models/Article.js');
 router.get('/', (req, res, next) => {
   Articles.find()
     .then((result) => {
-      console.log(result);
-      res.render('articles', { articles: result });
+      res.render('articles', { user: req.user, articles: result });
     });
 });
 
@@ -18,8 +18,7 @@ router.get('/new', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Articles.findById({ _id: req.params.id })
     .then((result) => {
-      console.log(result);
-      res.render('article', { article: result });
+      res.render('article', { user: req.user, article: result });
     });
 });
 

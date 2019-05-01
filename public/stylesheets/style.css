@@ -64,6 +64,10 @@ a {
 .nav-link {
   color: white; }
 
+.error-msg {
+  color: red;
+  padding: 0 50px; }
+
 .card-title-article {
   text-align: center; }
 

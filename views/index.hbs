@@ -3,19 +3,29 @@
     <img src="/images/9888042-3d-play-games-crossword-on-white-background.jpg" height="400" width="400">
   </div>
   <div class="card" style="width: 18rem;">
-    <form>
+    <form action="/home" method="POST">
     <div class="form-group">
-      <a href="/auth/gmail" class="SocialLogIn">Login With Gmail</a>
+      <a href="/auth/gmail" class="SocialLogIn">Register With Gmail</a>
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <label for="inputPassword1">Password</label>
+      <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="Password">
+      <label for="inputPassword2">Confirm Password</label>
+      <input type="password" name="passCheck" class="form-control" id="inputPassword2" placeholder="Password">
     </div>    
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+    {{#if message }}
+      <div class="error-msg"> {{message }} </div>
+    {{/if}}
   </form>
+    <p class="account-message">
+    Do you already have an account?
+    <a href="/sign-in">Login</a>
+  </p>
+</form>
   </div>
 </div>
 
