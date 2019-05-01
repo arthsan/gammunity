@@ -20,6 +20,7 @@ router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
   const { title, text } = req.body;  
   const photo = req.file.url;
   const photoName = req.file.originalname; 
+  console.log(photo);
   const newArticle = new Articles({ title, text, photo, photoName });  
   newArticle.save()
     .then((article) => {
