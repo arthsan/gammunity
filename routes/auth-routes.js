@@ -71,7 +71,6 @@ router.post('/sign-in', passport.authenticate('local', {
 }));
 
 router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log('!!!!!!!!!!!!!!!!!!', req.user);
   Events.find()
     .then((result) => {
       let mainEvents;
@@ -107,7 +106,7 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
   } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
-  const creator = req.user;    
+  const creator = req.user;
   const newEvent = new Events({
     title, category, photoName, photo, clan, text, date, creator,
   });
@@ -132,11 +131,17 @@ router.get('/events/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) =>
 });
 
 router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
-  const { title, category, rate, text, date, clan, latitude, longitude } = req.body;
+  const {
+    title, category, rate, text, date, clan, latitude, longitude,
+  } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
   // eslint-disable-next-line max-len
-  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, latitude, longitude } })
+  Events.findByIdAndUpdate(req.params.id, {
+    $set: {
+      title, category, rate, photoName, photo, text, date, clan, latitude, longitude,
+    },
+  })
     .then((result) => {
       console.log(result);
       res.redirect('/home');
@@ -165,6 +170,26 @@ router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
+    });
+});
+
+router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Events.findById({ _id: req.params.id })
+  // .populate('users')
+    .then((result) => {
+      console.log(result);
+      if (!result.users.includes(req.user._id)) {
+        Events.findOneAndUpdate({ _id: req.params.id }, { $push: { users: req.user._id } })
+          .then(() => {
+            res.render('event-detail', { message: 'You are in this event!', user: req.user, event: result });
+            res.redirect('/home');
+          })
+          .catch(error => console.log(error));
+      }
+      else {
+        res.render('event-details', { user: req.user, message: 'You are in this event!' });
+        res.redirect('/home');
+      }
     });
 });
 
