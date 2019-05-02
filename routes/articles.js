@@ -65,7 +65,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 });
 
 router.get('/:id/delet', (req, res, next) => {
-  Articles.deleteOne({ _id: req.params.id })
+  Articles.findByIdAndDelete({ _id: req.params.id })
     .then((result) => {
       res.redirect('articles');
     })

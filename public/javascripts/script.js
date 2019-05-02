@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }, false);
 
-const latitude = document.getElementById('latitude');
-const longitude = document.getElementById('longitude');
-console.log(latitude, longitude);
+const latitude = document.getElementById('latitude').innerText;
+const longitude = document.getElementById('longitude').innerText;
+let lati = parseFloat(latitude);
+let long = parseFloat(longitude);
+
 
 function startMap() {
   const ironhackBCN = {
@@ -16,14 +18,14 @@ function startMap() {
   const map = new google.maps.Map(
     document.getElementById('map'),
     {
-      zoom: 5,
+      zoom: 10,
       center: ironhackBCN
     }
   );
   const myMarker = new google.maps.Marker({
     position: {
-      lat: -23.533773,    
-      lng: -46.625290,
+      lat: lati,    
+      lng: long,
     },
     map: map,
     title: "Event here"
