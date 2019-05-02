@@ -111,20 +111,20 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
   const newEvent = new Events({
     title, category, photoName, photo, clan, text, date, creator,
   });
+
   newEvent.save()
     .then((event) => {
-      res.render('home', { user: req.user } );
+      res.redirect('/home');
     })
     .catch((error) => {
       console.log(error);
     });
-  res.render('createEvent', { user: req.user });
 });
 
 router.get('/events/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .then((result) => {
-      res.render('editEvent', { event: result });
+      res.render('editEvent', { user: req.user, event: result });
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
@@ -136,10 +136,10 @@ router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single
   const photo = req.file.url;
   const photoName = req.file.originalname;
   // eslint-disable-next-line max-len
-  Events.findByIdAndUpdate(req.params.id, { $set: {title, category, rate, photoName, photo,text, date, clan, latitude, longitude } })
+  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, latitude, longitude } })
     .then((result) => {
       console.log(result);
-      res.redirect(`/events/${req.params.id}`);
+      res.redirect('/home');
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
@@ -148,8 +148,8 @@ router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single
 
 router.get('/events/:id/delet', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.deleteOne({ _id: req.params.id })
-    .then((result) => {
-      res.redirect('home');
+    .then(() => {
+      res.redirect('/home');
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);

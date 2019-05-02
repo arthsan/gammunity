@@ -1,9 +1,9 @@
-<form action="/article/new" method="POST" enctype="multipart/form-data" >
+<form action="/article/{{article.id}}/edit" method="POST" enctype="multipart/form-data" >
   <div id="container-home-event">
     <div class="card" style="width: 700">
       <div class="form-group">      
         <label for="title">Title: {{article.title}}</label>
-        <input type="text" class="form-control" placeholder="Enter Title" name="title">      
+        <input type="text" value="{{article.title}}" class="form-control" placeholder="Enter Title" name="title">      
       </div>    
       <label>Article Photo: {{article.photoName}}</label>
       <br>
