@@ -5,9 +5,17 @@
       <div class="card-body">
         <h3 class="card-title">{{event.title}}</h3>
         <h5>Event Rate: {{event.rate}}</h5>
+        <h5>Event Date: {{event.date}}</h5>
         <p class="card-text">OUR OLD SCHOOL GAME NIGHT IS HERE!! we invite you to jin us to our monthly night to play old 64bits games and dinner with us. We will meet at Arthur's house next saturday at 20 oclock. Don't forget to bring your drinks!  </p>
-        <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button>       
-      </div>
+        <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button> 
+        <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit Event</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/events/{{event._id}}/edit">Edit</a>
+                <a class="dropdown-item" href="/events/{{event._id}}/delet">Delete</a>              
+              </div>
+        </div>             
+      </div>      
     </div>
     <div class="card">      
       <div class="card-body">

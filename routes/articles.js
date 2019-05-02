@@ -38,4 +38,42 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.get('/:id/edit',(req, res, next) => {
+  console.log('test', req.params.id )
+  Articles.findById({ _id: req.params.id })
+    .then((result) => {
+      res.render('editArticle', { article: result });
+    })
+    .catch((error) => {
+      console.log('Error while retrieving event details: ', error);
+    });
+});
+
+router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
+  const { title, text, rate } = req.body;
+  const photo = req.file.url;
+  const photoName = req.file.originalname;
+  // eslint-disable-next-line max-len
+  Articles.findByIdAndUpdate(req.params.id, { $set: {title, text, photo, photoName, rate }})
+    .then((result) => {
+      console.log(result);
+      res.redirect(`/article/${req.params.id}`);
+    })
+    .catch((error) => {
+      console.log('Error while retrieving event details: ', error);
+    });
+});
+
+router.get('/:id/delet', (req, res, next) => {
+  Articles.deleteOne({ _id: req.params.id })
+    .then((result) => {
+      res.redirect('articles');
+    })
+    .catch((error) => {
+      console.log('Error while retrieving event details: ', error);
+    });
+});
+
+
+
 module.exports = router;

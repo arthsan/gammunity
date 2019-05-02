@@ -1,43 +1,41 @@
-<form action="/events/new" method="POST" enctype="multipart/form-data">
+<form action="/events/{{event._id}}/edit" method="POST" enctype="multipart/form-data">
   <div id="container-home-event">
     <div class="card" style="width: 700">
-         <label for="title">New event Title:</label>
+         <label for="title">Title: {{event.title}}</label>
       <input type="text" class="form-control" name ="title" id="titleEvent" aria-describedby="emailHelp" placeholder="Enter Title">      
     </div>
     <div class="form-group">
-      <label for="category">Category</label>
+      <label for="category">Category: {{event.category}}</label>
       <input type="text" class="form-control" name="category" id="categoryEvent" placeholder="nintendo/PS4/...">
     </div>
-    <label>Event Photo</label>
-    <br>
-    <input type="file" name="photo">
+    <div class="form-group">
+      <label for="rate">Rate: {{event.rate}}</label>
+      <input type="text" class="form-control" name="rate" id="rateEvent">
+    </div>
+    <div class="form-group">
+      <label>Photo: {{event.photoName}}</label>
+      <input type="file" name="photo">
+    </div>    
     <div class="form-group">      
-      <label for="clan">Clan Name</label>
+      <label for="clan">Clan: {{event.clan}}</label>
       <input type="text" class="form-control" id="clanName" name="clan">      
     </div>  
     <div class="form-group">         
-      <textarea name="text" placeholder="write about the event..." style="width:100%;"></textarea>      
+      <textarea name="text" placeholder="write about the event..." style="width:100%;">{{event.text}}</textarea>      
     </div>    
     <div class="form-group">
-      <label for="date">Event Date</label>
+      <label for="date">Date:{{event.date}}</label>
       <input type="date" class="form-control" id="eventStart" name="date">
     </div>   
     <div class="form-group">      
       <label for="clan">latitude event</label>
-      <input type="text" class="form-control" id="latitude">      
+      <input type="text" class="form-control" name="latitude">      
     </div>
     <div class="form-group">      
       <label for="clan">longitude event</label>
-      <input type="text" class="form-control" id="longitude">      
+      <input type="text" class="form-control" name="longitude">      
     </div>  
     <button type="submit" class="btn btn-primary" id="eventSumit">Submit</button>
     </div>
   </div>
 </form> 
-
-
-
-
-
-
-
