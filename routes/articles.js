@@ -12,11 +12,11 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/new', (req, res, next) => {
+router.get('/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('createNew', { user: req.user });
 });
 
-router.post('/new', uploadCloud.single('photo'), (req, res, next) => {  
+router.post('/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {  
   const { title, text } = req.body;  
   const photo = req.file.url;
   const photoName = req.file.originalname; 
@@ -24,7 +24,7 @@ router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
   const newArticle = new Articles({ title, text, photo, photoName });  
   newArticle.save()
     .then((article) => {
-      res.render('articles');
+      res.redirect('/article');
     })
     .catch((error) => {
       console.log(error);
@@ -38,18 +38,17 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.get('/:id/edit',(req, res, next) => {
-  console.log('test', req.params.id )
+router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Articles.findById({ _id: req.params.id })
     .then((result) => {
-      res.render('editArticle', { article: result });
+      res.render('editArticle', { user: req.user, article: result });
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
     });
 });
 
-router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
+router.post('/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
   const { title, text, rate } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
@@ -67,7 +66,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 router.get('/:id/delet', (req, res, next) => {
   Articles.findByIdAndDelete({ _id: req.params.id })
     .then((result) => {
-      res.redirect('articles');
+      res.redirect('/article');
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);

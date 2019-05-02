@@ -27,7 +27,7 @@ a {
   margin-bottom: 10px; 
 }
 #homeContainer{
-  margin: 5% auto;
+  // margin: 5% auto;
 }
 #profileContainer{
   margin: 5% auto;
@@ -97,3 +97,12 @@ a {
   width: 100%;
  }
 
+ #articlesContainer{
+  display: block;
+  margin: 50px auto;   
+ }
+
+ #titleNew{
+   text-align: center;
+ }
+ 

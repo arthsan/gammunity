@@ -2,11 +2,11 @@
   <div id="container-home-event">
     <div class="card" style="width: 700">
          <label for="title">Title: {{event.title}}</label>
-      <input type="text" class="form-control" name ="title" id="titleEvent" aria-describedby="emailHelp" placeholder="Enter Title">      
+      <input type="text" value="{{event.title}}" class="form-control" name ="title" id="titleEvent" aria-describedby="emailHelp" placeholder="Enter Title">      
     </div>
     <div class="form-group">
       <label for="category">Category: {{event.category}}</label>
-      <input type="text" class="form-control" name="category" id="categoryEvent" placeholder="nintendo/PS4/...">
+      <input type="text" class="form-control" value="{{event.category}}" name="category" id="categoryEvent" placeholder="nintendo/PS4/...">
     </div>
     <div class="form-group">
       <label for="rate">Rate: {{event.rate}}</label>
@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <label>Photo: {{event.photoName}}</label>
-      <input type="file" name="photo">
+      <input type="file" value="{{event.photoName}}" name="photo">
     </div>    
     <div class="form-group">      
       <label for="clan">Clan: {{event.clan}}</label>
@@ -25,16 +25,12 @@
     </div>    
     <div class="form-group">
       <label for="date">Date:{{event.date}}</label>
-      <input type="date" class="form-control" id="eventStart" name="date">
-    </div>   
+      <input type="date" class="form-control" value="{{event.date}}" id="eventStart" name="date">
+    </div>      
     <div class="form-group">      
-      <label for="clan">latitude event</label>
-      <input type="text" class="form-control" name="latitude">      
-    </div>
-    <div class="form-group">      
-      <label for="clan">longitude event</label>
-      <input type="text" class="form-control" name="longitude">      
-    </div>  
+      <label for="clan">Address</label>
+      <input type="text" class="form-control" name="address" id="address" value="{{event.address}}">      
+    </div>    
     <button type="submit" class="btn btn-primary" id="eventSumit">Submit</button>
     </div>
   </div>
