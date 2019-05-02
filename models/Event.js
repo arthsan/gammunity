@@ -12,8 +12,7 @@ const eventSchema = new Schema({
   date: { type: Date, default: Date.now },
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   clan: { type: String, default: 0 },
-  latitude: String,
-  longitude: String,
+  address: String,
   requisits: {
     role: { type: String, enum: ['ADMIN', 'GUEST', 'MEMBER'] },
     clan: Boolean,

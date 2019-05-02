@@ -1,33 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   console.log('IronGenerator JS imported successfully!');
-
 }, false);
 
-const latitude = document.getElementById('latitude');
-const longitude = document.getElementById('longitude');
-console.log(latitude, longitude);
-
-function startMap() {
-  const ironhackBCN = {
-    lat: -23.533773,    
-    lng: -46.625290,
-  };
-  const map = new google.maps.Map(
-    document.getElementById('map'),
-    {
-      zoom: 5,
-      center: ironhackBCN
+var geocoder;
+  var map;
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 14,
+      center: latlng
     }
-  );
-  const myMarker = new google.maps.Marker({
-    position: {
-      lat: -23.533773,    
-      lng: -46.625290,
-    },
-    map: map,
-    title: "Event here"
-  });
-}
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  }
 
-startMap();
+  function codeAddress() {
+    var address = document.getElementById('address').innerText;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+ initialize();
+ codeAddress();
+
+
+
+
+

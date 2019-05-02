@@ -21,9 +21,6 @@ a {
   padding: 4px;
   margin-bottom: 10px; }
 
-#homeContainer {
-  margin: 5% auto; }
-
 #profileContainer {
   margin: 5% auto; }
 
@@ -78,5 +75,12 @@ a {
 #map {
   height: 500px;
   width: 100%; }
+
+#articlesContainer {
+  display: block;
+  margin: 50px auto; }
+
+#titleNew {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
