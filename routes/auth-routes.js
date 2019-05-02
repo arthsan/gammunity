@@ -106,13 +106,14 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
     title, category, clan, text, date,
   } = req.body;
   const photo = req.file.url;
-  const photoName = req.file.originalname;  
+  const photoName = req.file.originalname;
+  const creator = req.user;    
   const newEvent = new Events({
-    title, category, photoName, photo, clan, text, date,
+    title, category, photoName, photo, clan, text, date, creator,
   });
   newEvent.save()
     .then((event) => {
-      res.render('home', { user: req.user });
+      res.render('home', { user: req.user } );
     })
     .catch((error) => {
       console.log(error);
@@ -157,7 +158,9 @@ router.get('/events/:id/delet', ensureLogin.ensureLoggedIn(), (req, res, next) =
 
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
+    .populate('creator')
     .then((result) => {
+      console.log(result);
       res.render('event-detail', { user: req.user, event: result });
     })
     .catch((error) => {
