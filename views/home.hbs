@@ -1,6 +1,6 @@
 {{#if user}}
 <div class="container" id="homeContainer">
-  <h2>Main Events:</h2>
+  <h1>Main Events:</h1>
   <div class="card-deck">    
       {{#each mainEvent}}     
         {{>mainEvent this}} 
@@ -26,12 +26,12 @@
             <div class="col-md-12" id="anuncios">
               <aside>
                 {{#if admin}}
-                <h2>ADMIN Tools</h2>
-                <br>
-                <h4>New EVENT</h4>
-                <a href="/events/new" class="SocialLogIn">CREATE EVENT</a>
-                <h4>New Article</h4>           
-                <a href="/article/new" class="SocialLogIn">WRITE A NEW!!</a>  
+                  <h2>ADMIN Tools</h2>
+                  <br>
+                  <h4>New EVENT</h4>
+                  <a href="/events/new" class="SocialLogIn">CREATE EVENT</a>
+                  <h4>New Article</h4>           
+                  <a href="/article/new" class="SocialLogIn">WRITE A NEW!!</a>  
                 {{/if}}                                   
               </aside>
             </div>

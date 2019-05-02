@@ -156,11 +156,33 @@ router.get('/events/:id/delet', ensureLogin.ensureLoggedIn(), (req, res, next) =
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .populate('creator')
-    .then((result) => {      
-      res.render('event-detail', { user: req.user, event: result });
+    .then((result) => {  
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
+      const dateTime = result.date.toLocaleDateString('en-US', options);   
+      res.render('event-detail', { user: req.user, event: result, date: dateTime });
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
+    });
+});
+
+router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Events.findById({ _id: req.params.id })
+  // .populate('users')
+    .then((result) => {
+      console.log(result);
+      if (!result.users.includes(req.user._id)) {
+        Events.findOneAndUpdate({ _id: req.params.id }, { $push: { users: req.user._id } })
+          .then(() => {
+            res.render('event-detail', { message: 'You are in this event!', user: req.user, event: result });
+            res.redirect('/home');
+          })
+          .catch(error => console.log(error));
+      }
+      else {
+        res.render('event-details', { user: req.user, message: 'You are in this event!' });
+        res.redirect('/home');
+      }
     });
 });
 

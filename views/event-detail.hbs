@@ -5,11 +5,20 @@
       <div class="card-body">
         <h3 class="card-title">{{event.title}}</h3>
         <h5>Event Rate: {{event.rate}}</h5>
-        <h5>Event Date: {{event.date}}</h5>
+        <h5>Users: {{event.users.length}}</h5>
+        <h5>Event Date: {{date}}</h5>
         <h5>Event Creator: {{event.creator.0.username}}</h5>         
         <h5 id="address">{{event.address}}</h5>    
         <p class="card-text">{{event.text}}</p>
-        <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button> 
+        <form action="/events/{{event.id}}/confirmation" method="POST">
+          <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button> 
+        </form>
+        <div>
+           {{#if message }}
+            <div class="error-msg">{{message }} </div>
+           {{/if}}
+        </div>
+        </form>
         <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit Event</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
