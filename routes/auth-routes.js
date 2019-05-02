@@ -70,7 +70,7 @@ router.post('/sign-in', passport.authenticate('local', {
   passReqToCallback: true,
 }));
 
-router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
+router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {  
   Events.find()
     .then((result) => {
       let mainEvents;
@@ -106,20 +106,9 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
   } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
-  const creator = req.user;
-  const newEvent = new Events({ 
-title,
-category,
-photoName,
-photo,
-clan,
-text,
-date,
-creator,
-    latitude,
-longitude,
-address 
-});
+  const creator = req.user;    
+  const newEvent = new Events({title, category, photoName, photo, clan, text, date, creator,
+    latitude, longitude, address });
   newEvent.save()
     .then((event) => {
       res.redirect('/home');
@@ -140,15 +129,11 @@ router.get('/events/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) =>
 });
 
 router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
-  const {
- title, category, rate, text, date, clan, latitude, longitude, address 
-} = req.body;
+  const { title, category, rate, text, date, clan, latitude, longitude, address } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
   // eslint-disable-next-line max-len
-  Events.findByIdAndUpdate(req.params.id, { $set: {
- title, category, rate, photoName, photo, text, date, clan, latitude, longitude, address 
-} })
+  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, latitude, longitude, address } })
     .then((result) => {
       console.log(result);
       res.redirect('/home');
@@ -172,12 +157,21 @@ router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .populate('creator')
     .then((result) => {
-      res.render('event-detail', { user: req.user, event: result });
-    })
+      if (req.user.role === 'ADMIN') {
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
+        const dateTime = result.date.toLocaleDateString('en-US', options);   
+        res.render('event-detail', { admin: req.user.role, user: req.user, event: result, date: dateTime });
+      } else {
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
+        const dateTime = result.date.toLocaleDateString('en-US', options);   
+        res.render('event-detail', { user: req.user, event: result, date: dateTime });
+      }
+    })      
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
     });
-});
+  }  
+);
 
 router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
@@ -195,9 +189,8 @@ router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res,
         res.render('event-details', { user: req.user, message: 'You are in this event!' });
         res.redirect('/home');
       }
-    });
+    })
 });
-
 
 router.get('/events/:id/users', ensureLogin.ensureLoggedIn(), (req, res) => {
   Events.findById({ _id: req.params.id })

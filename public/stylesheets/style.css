@@ -21,6 +21,14 @@ a {
   padding: 4px;
   margin-bottom: 10px; }
 
+#homeContainer {
+  margin: 2% auto; }
+
+#homeContainer > h1, h3 {
+  font-family: cursive;
+  color: blue;
+  margin-bottom: 15px; }
+
 #profileContainer {
   margin: 5% auto; }
 
@@ -28,12 +36,8 @@ a {
   margin: 2% auto; }
 
 .comments {
-  border: 1px solid red;
   margin: 0 auto 2% auto;
   margin: 2% auto; }
-
-#commentPhoto > img {
-  margin: 1px solid red; }
 
 .dropdown {
   margin: 10px auto; }
@@ -50,9 +54,6 @@ a {
 
 .commentsArticle {
   margin: 0 auto 1% auto; }
-
-#article {
-  border: 1px solid red; }
 
 .nav-link {
   color: white; }
@@ -82,5 +83,12 @@ a {
 
 #titleNew {
   text-align: center; }
+
+#textEvent > p {
+  font-size: 20px;
+  color: black; }
+
+#secondaryEvent > a {
+  color: black; }
 
 /*# sourceMappingURL=style.css.map */
