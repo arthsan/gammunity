@@ -19,10 +19,10 @@
     {{else}}
     <a class="navbar-brand" href="/">
     {{/if}}
-    <img src="/images/logo-ironhack-blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    GAMMUNITY
+    <img src="/images/gammunity2.png" width="70" height="40" class="d-inline-block align-top" alt="">
+    <strong id = 'titlePage'>GAMMUNITY</strong>
   </a> 
-  <ul class="nav justify-content-end">
+  <ul class="nav justify-content-end navLayout">
     <li class="nav-item">
       {{#if user}}
       <a class="nav-link active" href="/home">Events</a>
@@ -42,9 +42,8 @@
     <li class="nav-item">
       {{#if user}}
      <li class="nav-item"> 
-       <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <a class="nav-link" href="/profile/{{user._id}}">{{user.nickname}}<img src="{{user.photo}}" width="25px"></a>
+       <div class="btn-group dropleft" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-info btn-sm dropdown-toggle btnLogIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" height="100%"><img height ="100%"src="{{user.photo}}" width="30px">
               </button>
               <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
@@ -66,7 +65,7 @@
 
 <footer class="page-footer font-small" style="background-color: red;">
   <div class="footer-copyright text-center py-3">© 2019 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> GAMMUNITY</a>
+     <strong id = 'titlePage'>GAMMUNITY</strong>
   </div>
 </footer>
 </html>

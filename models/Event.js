@@ -10,6 +10,7 @@ const eventSchema = new Schema({
   text: String,
   // location: String,
   date: { type: Date, default: Date.now },
+  dateTime: String,
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   clan: { type: String, default: 0 },
   address: String,

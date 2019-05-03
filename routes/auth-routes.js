@@ -43,7 +43,7 @@ router.post('/', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass,
+        password: hashPass,        
       });
 
       newUser.save((err) => {
@@ -86,7 +86,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
       } else {
         res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
       }
-    })
+})
     .catch((error) => {
       console.log('Error while retrieving events details: ', error);
     });
@@ -102,13 +102,14 @@ router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
   const {
-    title, category, clan, text, date, latitude, longitude, address
+    title, category, clan, text, date, address, rate
   } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
-  const creator = req.user;    
-  const newEvent = new Events({title, category, photoName, photo, clan, text, date, creator,
-    latitude, longitude, address });
+  const creator = req.user; 
+  const dateTime = date;
+  console.log(typeof(dateTime));   
+  const newEvent = new Events({title, category, photoName, photo, clan, text,rate, date, dateTime, creator, address });
   newEvent.save()
     .then((event) => {
       res.redirect('/home');
@@ -129,11 +130,11 @@ router.get('/events/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) =>
 });
 
 router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
-  const { title, category, rate, text, date, clan, latitude, longitude, address } = req.body;
+  const { title, category, rate, text, date, clan, address } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
   // eslint-disable-next-line max-len
-  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, latitude, longitude, address } })
+  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, address } })
     .then((result) => {
       console.log(result);
       res.redirect('/home');
@@ -178,14 +179,25 @@ router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res,
             res.redirect('/home');
           })
           .catch(error => console.log(error));
-      }
-      else {
+      } else {
         res.render('event-details', { user: req.user, message: 'You are in this event!' });
         res.redirect('/home');
       }
     });
 });
 
+
+router.get('/events/:id/users', ensureLogin.ensureLoggedIn(), (req, res) => {
+  Events.findById({ _id: req.params.id })
+    .populate('users')
+    .then((event) => {
+      console.log(event);
+      res.render('users', { user: req.user, event });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 router.get('/logout', (req, res) => {
   req.logout();
