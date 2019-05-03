@@ -5,13 +5,13 @@
       <div class="card-body">
         <h3 class="card-title">{{event.title}}</h3>
         <h5>Event Rate: {{event.rate}}</h5>
-        <h5>Users: {{event.users.length}}</h5>
+        <h5>Users:<a href="/events/{{event.id}}/users"> {{event.users.length}} </a></h5>
         <h5>Event Date: {{event.dateTime}}</h5>
         <h5>Event Creator: {{event.creator.0.username}}</h5>         
         <h5 id="address">{{event.address}}</h5>    
         <p class="card-text">{{event.text}}</p>
         <form action="/events/{{event.id}}/confirmation" method="POST">
-          <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button> 
+        <button type="submit" class="btn btn-primary" id='joinbtn'>Join in!</button> 
         </form>
         <div>
            {{#if message }}

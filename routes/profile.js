@@ -19,13 +19,15 @@ router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { nickname, password, passCheck, username, birthday } = req.body;
- 
+  const {
+    nickname, password, passCheck, username, birthday,
+  } = req.body;
+
   if (username === '' || password === '' || passCheck === '') {
     res.render('profile-edit', { user: req.user, message: 'Indicate username and password' });
     return;
   }
-  
+
   if (passCheck !== password) {
     res.render('profile-edit', { user: req.user, message: 'Check your password' });
     return;
@@ -33,11 +35,15 @@ router.post('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
-  Users.findByIdAndUpdate(req.params.id, { $set: { nickname, password: hashPass, username, birthday } })
+  Users.findByIdAndUpdate(req.params.id, {
+    $set: {
+      nickname, password: hashPass, username, birthday,
+    },
+  })
     .then((result) => {
-      console.log(result)
+      console.log(result);
       res.redirect(`/profile/${req.params.id}`);
-    })
+    });
 });
 
 
@@ -46,7 +52,7 @@ router.post('/:id/photo', ensureLogin.ensureLoggedIn(), uploadCloud.single('phot
   const photoName = req.file.originalname;
   Users.findByIdAndUpdate(req.params.id, { $set: { photo, photoName } })
     .then((result) => {
-      console.log(result)
+      console.log(result);
       res.redirect(`/profile/${req.params.id}`);
     })
     .catch((error) => {

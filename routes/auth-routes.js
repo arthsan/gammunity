@@ -74,8 +74,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   Events.find()
     .then((result) => {
       let mainEvents;
-      let leftEvents;
-      const obj = {};
+      let leftEvents;    
       const a = result.sort((a, b) => b.rate - a.rate);
       mainEvents = a.slice(0, 3);
       leftEvents = a.slice(3);
@@ -112,8 +111,7 @@ router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('pho
     title, category, photoName, photo, clan, text, rate, date, dateTime, creator, address,
   });
   newEvent.save()
-    .then((event) => {
-      console.log(event);
+    .then((event) => {      
       res.redirect('/home');
     })
     .catch((error) => {
@@ -166,8 +164,7 @@ router.get('/events/:id/delet', ensureLogin.ensureLoggedIn(), (req, res, next) =
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .populate('creator')
-    .then((result) => {
-      console.log(result)
+    .then((result) => {      
       if (req.user.role === 'ADMIN') {
         const options = {
           weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
@@ -192,8 +189,7 @@ router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
   // .populate('users')
-    .then((result) => {
-      console.log(result);
+    .then((result) => {      
       if (!result.users.includes(req.user._id)) {
         Events.findOneAndUpdate({ _id: req.params.id }, { $push: { users: req.user._id } })
           .then(() => {
@@ -211,8 +207,7 @@ router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res,
 router.get('/events/:id/users', ensureLogin.ensureLoggedIn(), (req, res) => {
   Events.findById({ _id: req.params.id })
     .populate('users')
-    .then((event) => {
-      console.log(event);
+    .then((event) => {      
       res.render('users', { user: req.user, event });
     })
     .catch((error) => {

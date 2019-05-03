@@ -77,6 +77,4 @@ router.get('/:id/delet', (req, res, next) => {
     });
 });
 
-
-
 module.exports = router;
