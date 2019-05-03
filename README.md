@@ -42,7 +42,7 @@ You can edit your profile with your info and change your avatar every time you w
 You can view our project:
 
 $ git clone https://github.com/ArnoldThanos/gammunity.git
-$ cd Game-Project
+$ cd GAMMUNITY
 
 
 the link to our social game network : [gammunity](https://gammunity.herokuapp.com/)
