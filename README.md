@@ -10,8 +10,8 @@ GAMMUNITY is a GAMER and GEEK social network, where you can hang out with other 
 ## Developers
 -------------------------
 
-Arnold Lafuente Urquieta
-Arthur Santoianni Barazzone Durant
+* Arnold Lafuente Urquieta
+* Arthur Santoianni Barazzone Durant
 
 ### Web instructions:
 -------------------------
@@ -45,14 +45,16 @@ $ git clone https://github.com/ArnoldThanos/gammunity.git
 $ cd Game-Project
 
 
-the link to our social game network : [gammunity](https://arnoldthanos.github.io/Game-Project/)
+the link to our social game network : [gammunity](https://gammunity.herokuapp.com/)
 
 ### Unsolved problems:
 -------------------------
 
 - Add comments funcionality
 - Add friends network
-
+- Social Login
+- CRUD Comments
+- Add rankings 
 
 
 
