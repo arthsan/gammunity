@@ -43,7 +43,7 @@ router.post('/', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass,        
+        password: hashPass,
       });
 
       newUser.save((err) => {
@@ -70,7 +70,7 @@ router.post('/sign-in', passport.authenticate('local', {
   passReqToCallback: true,
 }));
 
-router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {  
+router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   Events.find()
     .then((result) => {
       let mainEvents;
@@ -86,7 +86,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
       } else {
         res.render('home', { user: req.user, mainEvent: mainEvents, leftEvent: leftEvents });
       }
-})
+    })
     .catch((error) => {
       console.log('Error while retrieving events details: ', error);
     });
@@ -102,16 +102,18 @@ router.get('/events/new', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/events/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
   const {
-    title, category, clan, text, date, address, rate
+    title, category, clan, text, date, address, rate,
   } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
-  const creator = req.user; 
+  const creator = req.user;
   const dateTime = date;
-  console.log(typeof(dateTime));   
-  const newEvent = new Events({title, category, photoName, photo, clan, text,rate, date, dateTime, creator, address });
+  const newEvent = new Events({
+    title, category, photoName, photo, clan, text, rate, date, dateTime, creator, address,
+  });
   newEvent.save()
     .then((event) => {
+      console.log(event);
       res.redirect('/home');
     })
     .catch((error) => {
@@ -130,11 +132,18 @@ router.get('/events/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) =>
 });
 
 router.post('/events/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (req, res, next) => {
-  const { title, category, rate, text, date, clan, address } = req.body;
+  const {
+    title, category, rate, text, date, clan, address,
+  } = req.body;
   const photo = req.file.url;
   const photoName = req.file.originalname;
+  const dateTime = date;
   // eslint-disable-next-line max-len
-  Events.findByIdAndUpdate(req.params.id, { $set: { title, category, rate, photoName, photo,text, date, clan, address } })
+  Events.findByIdAndUpdate(req.params.id, {
+ $set: {
+    title, category, rate, photoName, photo, text, date, dateTime, clan, address,
+  } 
+})
     .then((result) => {
       console.log(result);
       res.redirect('/home');
@@ -157,15 +166,28 @@ router.get('/events/:id/delet', ensureLogin.ensureLoggedIn(), (req, res, next) =
 router.get('/events/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
     .populate('creator')
-    .then((result) => {  
-      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
-      const dateTime = result.date.toLocaleDateString('en-US', options);   
-      res.render('event-detail', { user: req.user, event: result, date: dateTime });
+    .then((result) => {
+      console.log(result)
+      if (req.user.role === 'ADMIN') {
+        const options = {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        };
+        const dateTime = result.date.toLocaleDateString('en-US', options);
+        res.render('event-detail', {
+          admin: req.user.role, user: req.user, event: result, date: dateTime,
+        });
+      } else {
+        const options = {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        };
+        const dateTime = result.date.toLocaleDateString('en-US', options);
+        res.render('event-detail', { user: req.user, event: result, date: dateTime });
+      }
     })
     .catch((error) => {
       console.log('Error while retrieving event details: ', error);
     });
-});
+},);
 
 router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Events.findById({ _id: req.params.id })
@@ -185,7 +207,6 @@ router.post('/events/:id/confirmation', ensureLogin.ensureLoggedIn(), (req, res,
       }
     });
 });
-
 
 router.get('/events/:id/users', ensureLogin.ensureLoggedIn(), (req, res) => {
   Events.findById({ _id: req.params.id })
