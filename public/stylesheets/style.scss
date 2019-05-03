@@ -2,6 +2,9 @@
 //   padding: 50px;
 //   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 // }
+.nav-bcg {
+  background-color: #9c1616;
+}
 
 a {
   color: #00B7FF;
@@ -119,21 +122,24 @@ a {
    color: black;
  }
 
- .navLayout > li{
-   font-size: 20px;
+ #usersContainer {
+   margin: 5% auto;
  }
 
- .btnLogIn{
-   background-color: aqua;
- }
- #titlePage{
-   color: blue;
- }
- #errorImage > h2{
-   text-align: center;
+
+ .float-img {
+  float: left;
  }
 
- #btnGroupDropGame{
-   background-color: red;
-   border: 0;
+ #btnGroupDropgame{ 
+  background-color: #9c1616;
+  border: 0;
+ }
+
+ .align{
+   align-items: center;
+ }
+
+ .font-red{
+  color: white
  }

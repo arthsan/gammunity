@@ -34,9 +34,10 @@ router.post('/new', ensureLogin.ensureLoggedIn(), uploadCloud.single('photo'), (
 router.get('/:id', (req, res, next) => {
   Articles.findById({ _id: req.params.id })
     .then((result) => {
+      res.render('article', { article: result });
       if (req.user.role === 'ADMIN') {
         res.render('article', { admin: req.user.role, user: req.user, article: result });
-      } else {
+      } if (req.user.role === 'GUEST') {
         res.render('article', { user: req.user, article: result });
       }
     });
