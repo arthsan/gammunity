@@ -1,3 +1,6 @@
+.nav-bcg {
+  background-color: #9c1616; }
+
 a {
   color: #00B7FF; }
 
@@ -90,5 +93,21 @@ a {
 
 #secondaryEvent > a {
   color: black; }
+
+#usersContainer {
+  margin: 5% auto; }
+
+.float-img {
+  float: left; }
+
+#btnGroupDropgame {
+  background-color: #9c1616;
+  border: 0; }
+
+.align {
+  align-items: center; }
+
+.font-red {
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */

@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<nav class="navbar navbar-light " style="background-color: red;">
+<nav class="navbar navbar-light nav-bcg">
     {{#if user}}
     <a class="navbar-brand" href="/home">
     {{else}}
@@ -22,7 +22,7 @@
     <img src="/images/logo-ironhack-blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
     GAMMUNITY
   </a> 
-  <ul class="nav justify-content-end">
+  <ul class="nav align justify-content-end">
     <li class="nav-item">
       {{#if user}}
       <a class="nav-link active" href="/home">Events</a>
@@ -43,8 +43,8 @@
       {{#if user}}
      <li class="nav-item"> 
        <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <a class="nav-link" href="/profile/{{user._id}}">{{user.nickname}}<img src="{{user.photo}}" width="25px"></a>
+              <button id="btnGroupDropgame" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link row float-img" href="/profile/{{user._id}}">{{user.nickname}}   <img src="{{user.photo}}" width="25px"></a>
               </button>
               <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
@@ -64,9 +64,9 @@
 {{{body}}}
 
 
-<footer class="page-footer font-small" style="background-color: red;">
-  <div class="footer-copyright text-center py-3">© 2019 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> GAMMUNITY</a>
+<footer class="page-footer font-small" style="background-color: #9c1616;">
+  <div class="footer-copyright font-red text-center py-3">© 2019 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> Arnold Lafuente & Arthur Santoianni</a>
   </div>
 </footer>
 </html>
