@@ -1,27 +1,28 @@
 ![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
 
-# Time-line: GAMES
+# GAMMUNITY
 -------------------------
 
-<p align="center"><img src="./images/time-line:games.png" width = "600" height="400"></p>
+<p align="center"><img src="./public/images/gammunity.png" width = "600" height="400"></p>
 
-Time line: GAMES is a card game played using 48 cards. Each card depicts a GAME on both sides, in one side it's the year when that game won "the best game of the year". 
+GAMMUNITY is a GAMER and GEEK social network, where you can hang out with other persons with same tastes ingames or geek culture.
 
-## Developer
+## Developers
 -------------------------
 
 Arnold Lafuente Urquieta
+Arthur Santoianni Barazzone Durant
 
-### Game instructions:
+### Web instructions:
 -------------------------
 
-The game has 4 difficulties, the cards are shuffled from the deck of cards and acoording to the difficulty level (1, 2, 3, 4) are delivered 4, 6, 8 or 10 cards.
+You have to have a account to join in the social network or you can create a new one. 
+In the first view you can see the events (we have 3 main events) where you can join them and see the details;
 
-The player must place the cards in ascending order from least to greatest according the year. For each card in correct order, the player earns 10 points.
+We also have a news page where you can see the last news about games, comics and geek culture.
 
-You win each level of the game when you put all the cards in correct order.
+You can edit your profile with your info and change your avatar every time you want to. 
 
-Click on the card you want to put on the board, if it's in the correct place it'll has a green border and if it's wrong will has a red border. You can click again on the wrong card, but you will lose a live( you only have 3).
 
 ### Used technologies:
 -------------------------
@@ -29,27 +30,28 @@ Click on the card you want to put on the board, if it's in the correct place it'
 * Javascript
 * HTML
 * CSS
+* Full Stack development
+* MongoDB
+* Express
+* Passport
 
 
 ### Installation instructions:
 ------------------------------
 
-You can view my project in your browser:
+You can view our project:
 
-$ git clone https://github.com/ArnoldThanos/Game-Project.git
+$ git clone https://github.com/ArnoldThanos/gammunity.git
 $ cd Game-Project
 
-Then click on the index.html file and open it in your browser. Have fun!!
 
-The game is also on GitHub Pages : [time-line:games](https://arnoldthanos.github.io/Game-Project/)
+the link to our social game network : [gammunity](https://arnoldthanos.github.io/Game-Project/)
 
 ### Unsolved problems:
 -------------------------
 
--The game needs more cards effects as drag the card to the correct place on the board.
--Go from level 1 to 4 adding the points.
--Put a card before or between cards that are already in the correct time-line place.
--Add 2 players game modality.
+- Add comments funcionality
+- Add friends network
 
 
 

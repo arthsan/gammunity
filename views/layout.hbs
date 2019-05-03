@@ -42,8 +42,8 @@
     <li class="nav-item">
       {{#if user}}
      <li class="nav-item"> 
-       <div class="btn-group dropleft" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-info btn-sm dropdown-toggle btnLogIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" height="100%"><img height ="100%"src="{{user.photo}}" width="30px">
+       <div class="btn-group" role="group">
+              <button id="btnGroupDropGame" type="button" class="btn btn-info btn-sm dropdown-toggle btnLogIn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" height="100%"><a class="nav-link row" href="/profile/{{user._id}}">{{user.nickname}}    <img src="{{user.photo}}" width="25px"></a>
               </button>
               <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
